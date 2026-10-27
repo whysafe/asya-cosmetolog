@@ -501,7 +501,7 @@ $('#toMaster').onclick=()=>setTab('master',true);
 const scr=$('#screen');
 let flowId=0;
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
-function top(title,sub,av){scr.innerHTML=`<div class="tgtop"><div class="av">${av}</div><div><b>${title}</b><small>${sub}</small></div></div>`}
+function tgHead(title,sub,av){scr.innerHTML=`<div class="tgtop"><div class="av">${av}</div><div><b>${title}</b><small>${sub}</small></div></div>`}
 function add(html,cls=''){const b=document.createElement('div');b.className=cls||'bub';b.innerHTML=html;scr.appendChild(b);scr.scrollTop=scr.scrollHeight}
 async function say(id,html,me,delay){await wait(delay);if(id!==flowId)return;if(!me){const ty=document.createElement('div');ty.className='typing';ty.textContent='печатает…';scr.appendChild(ty);scr.scrollTop=scr.scrollHeight;await wait(650);ty.remove();if(id!==flowId)return}add(html,'bub'+(me?' me':''))}
 function demoData(){
@@ -510,7 +510,7 @@ function demoData(){
 }
 async function clientFlow(){
   const id=++flowId,x=demoData(),prev=new Date(x.d);prev.setDate(x.d.getDate()-1);
-  top('Ася · запись','бот записи','АШ');
+  tgHead('Ася · запись','бот записи','АШ');
   $('#phNote').textContent='Так сообщения видит клиентка. Вам не нужно писать каждой вручную.';
   await say(id,`${x.n}, вы записаны ✨<br><b>${x.s.sh}</b><br>${fmt(x.d)}, ${x.t}<br>Малахова, 138а, домофон INDI, 3 этаж<time>сейчас</time>`,0,250);
   if(x.s.m>=60&&x.s.p!==null)await say(id,`Памятка перед процедурой:<br>· за 3 дня без скрабов и пилингов дома<br>· не загорать<br>· можно прийти без макияжа<time>сейчас</time>`,0,500);
@@ -521,7 +521,7 @@ async function clientFlow(){
 }
 async function masterFlow(){
   const id=++flowId,x=demoData();
-  top('Ася · уведомления','только для вас','🔔');
+  tgHead('Ася · уведомления','только для вас','🔔');
   $('#phNote').textContent='Так это видите вы: новая запись сразу в Telegram, расписание собирается само.';
   await say(id,`🆕 <b>Новая запись</b><br>${x.n}${x.first?' · впервые':''}<br>${x.s.sh}, ${x.s.m} мин<br>${fmt(x.d)}, ${x.t}–${toT(toM(x.t)+x.s.m)}<br>Контакт: ${x.c}<time>сейчас</time>`,0,250);
   await say(id,`Клиентке ушли подтверждение и памятка. Напоминание отправится за день автоматически.<time>сейчас</time>`,0,500);
@@ -533,7 +533,7 @@ $$('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.v));
 
 selectSvc(0);
 const pio=new IntersectionObserver(es=>{if(es[0].isIntersecting){clientFlow();pio.disconnect()}},{threshold:.3});pio.observe($('.phone'));
-top('Ася · запись','бот записи','АШ');
+tgHead('Ася · запись','бот записи','АШ');
 </script>
 </body>
 </html>
