@@ -515,7 +515,7 @@ async function clientFlow(){
   await say(id,`${x.n}, вы записаны ✨<br><b>${x.s.sh}</b><br>${fmt(x.d)}, ${x.t}<br>Малахова, 138а, домофон INDI, 3 этаж<time>сейчас</time>`,0,250);
   if(x.s.m>=60&&x.s.p!==null)await say(id,`Памятка перед процедурой:<br>· за 3 дня без скрабов и пилингов дома<br>· не загорать<br>· можно прийти без макияжа<time>сейчас</time>`,0,500);
   if(id!==flowId)return;add(`${prev.getDate()} ${MON[prev.getMonth()]}`,'sep');
-  await say(id,`Напоминание: завтра в ${x.t} ${x.s.sh.toLowerCase()} у Аси.<div class="kb"><span>✓ Буду</span><span>Перенести</span></div><time>12:00</time>`,0,500);
+  await say(id,`Напоминание: завтра в ${x.t} у Аси: ${x.s.sh}.<div class="kb"><span>✓ Буду</span><span>Перенести</span></div><time>12:00</time>`,0,500);
   await say(id,'Буду, спасибо!',1,900);
   if(x.s.m>=60&&x.s.p!==null){if(id!==flowId)return;add('на следующий день','sep');await say(id,`Как кожа после чистки? Если есть вопросы по уходу, просто ответьте на это сообщение 🤍<time>11:00</time>`,0,600)}
 }
